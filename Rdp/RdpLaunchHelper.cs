@@ -1,3 +1,5 @@
+// winhello-secure - part of winhello-secure (GPL-3.0)
+
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;

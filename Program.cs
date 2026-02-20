@@ -1,3 +1,5 @@
+// winhello-secure - part of https://github.com/aszego/winhello-secure (GPL-3.0)
+
 namespace WhSecure;
 using AuthProviders;
 using WhSecure.Rdp;
