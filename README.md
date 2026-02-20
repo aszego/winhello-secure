@@ -29,7 +29,7 @@ Returns base64-encoded encrypted or decrypted data. Uses Windows Hello for crypt
 ## Requirements
 
 - Windows with Windows Hello (PIN or biometrics)
-- .NET 9.0
+- .NET 10.0
 
 ## License
 
