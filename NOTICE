@@ -1,0 +1,8 @@
+winhello-secure incorporates code from the following project:
+
+KeePassWinHello
+Copyright (c) sirAndros and contributors
+https://github.com/sirAndros/KeePassWinHello
+Licensed under the MIT License
+
+The AuthProviders/ code in this repository is derived from KeePassWinHello.

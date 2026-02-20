@@ -1,3 +1,5 @@
+// winhello-secure - part of winhello-secure (GPL-3.0)
+
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;

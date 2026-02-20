@@ -1,4 +1,7 @@
-﻿using Microsoft.Win32.SafeHandles;
+// Derived from KeePassWinHello (MIT) - https://github.com/sirAndros/KeePassWinHello
+// winhello-secure - part of winhello-secure (GPL-3.0)
+
+using Microsoft.Win32.SafeHandles;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
