@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "importRdp": {
+      "commandName": "Project",
+      "commandLineArgs": "/importRdp c:\\temp\\test.rdp"
+    },
+    "launch RDP": {
+      "commandName": "Project",
+      "commandLineArgs": "c:\\temp\\test.rdp"
+    },
+    "launch RDP with multiMon": {
+      "commandName": "Project",
+      "commandLineArgs": "c:\\temp\\test.rdp /multiMon"
+    },
+    "winhello-secure encrypt": {
+      "commandName": "Project",
+      "commandLineArgs": "encrypt <BASE64 data>"
+    },
+    "winhello-secure decrypt": {
+      "commandName": "Project",
+      "commandLineArgs": "decrypt <BASE64 encrypted data>"
+    }
+  }
+}
