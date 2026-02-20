@@ -33,7 +33,7 @@ jobs:
               *) SUFFIX="-ci" ;;
             esac
             VERSION="${VERSION_PREFIX}${SUFFIX}.${RUN}"
-            ASSEMBLY_VERSION="${VERSION_PREFIX}.0.0"
+            ASSEMBLY_VERSION="${VERSION_PREFIX}.0"
             FILE_VERSION="${VERSION_PREFIX}.0.${RUN}"
           fi
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
