@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+      assembly_version:
+        required: true
+        type: string
+      file_version:
+        required: true
+        type: string
+
+outputs:
+  artifact_name:
+    value: ${{ jobs.build.outputs.artifact_name }}
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build (Release)
+        run: dotnet build -c Release --no-restore -p:Version=${{ inputs.version }} -p:AssemblyVersion=${{ inputs.assembly_version }} -p:FileVersion=${{ inputs.file_version }}
+
+      - name: Publish (Release)
+        run: dotnet publish winhello-secure/winhello-secure.csproj -c Release --no-build -o publish
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: winhello-secure-${{ inputs.version }}
+          path: publish
+
+      - id: artifact
+        run: echo "artifact_name=winhello-secure-${{ inputs.version }}" >> $GITHUB_OUTPUT
+        shell: bash
+
+    outputs:
+      artifact_name: ${{ steps.artifact.outputs.artifact_name }}
