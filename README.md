@@ -1,3 +1,4 @@
+[![Release Build](https://github.com/aszego/winhello-secure/actions/workflows/release-build.yml/badge.svg)](https://github.com/aszego/winhello-secure/actions/workflows/release-build.yml)
 # winhello-secure
 
 Windows Hello-protected RDP credential storage and launch tool. Encrypts RDP passwords with Windows Hello (PIN or biometrics) and launches RDP sessions using stored credentials.
@@ -28,7 +29,7 @@ Returns base64-encoded encrypted or decrypted data. Uses Windows Hello for crypt
 ## Requirements
 
 - Windows with Windows Hello (PIN or biometrics)
-- .NET 9.0
+- .NET 10.0
 
 ## License
 
