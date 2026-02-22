@@ -12,10 +12,9 @@ on:
       file_version:
         required: true
         type: string
-
-outputs:
-  artifact_name:
-    value: ${{ jobs.build.outputs.artifact_name }}
+    outputs:
+      artifact_name:
+        value: ${{ jobs.build.outputs.artifact_name }}
 
 jobs:
   build:
