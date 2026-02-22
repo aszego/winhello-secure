@@ -35,7 +35,7 @@ jobs:
         run: dotnet build -c Release --no-restore -p:Version=${{ inputs.version }} -p:AssemblyVersion=${{ inputs.assembly_version }} -p:FileVersion=${{ inputs.file_version }}
 
       - name: Publish (Release)
-        run: dotnet publish winhello-secure/winhello-secure.csproj -c Release --no-build -o publish
+        run: dotnet publish winhello-secure/winhello-secure.csproj -c Release --no-build -o publish -p:PublishSingleFile=true -p:DebugSymbols=false
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
