@@ -39,15 +39,15 @@ jobs:
         with:
           name: ${{ needs.build.outputs.artifact_name }}
           path: release
-      - name: List and compress
+      - name: Create release package
         run: |
           Write-Host "Contents of release folder:"
           Get-ChildItem -Path release -Recurse | ForEach-Object { Write-Host $_.FullName }
-          $zipPath = "winhello-secure-${{ github.event.inputs.tag }}.zip"
+          $zipName = "winhello-secure-${{ github.event.inputs.tag }}.zip"
+          $zipPath = Join-Path $env:GITHUB_WORKSPACE $zipName
           Compress-Archive -Path release\* -DestinationPath $zipPath -Force
           Write-Host "Zip created: $zipPath"
           Write-Host "Zip exists: $(Test-Path $zipPath)"
-          Get-ChildItem -Filter *.zip
-      - run: gh release create ${{ github.event.inputs.tag }} winhello-secure-${{ github.event.inputs.tag }}.zip --generate-notes
+          gh release create ${{ github.event.inputs.tag }} $zipPath --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
