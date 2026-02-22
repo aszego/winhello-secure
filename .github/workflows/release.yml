@@ -39,6 +39,6 @@ jobs:
         with:
           name: ${{ needs.build.outputs.artifact_name }}
       - run: Compress-Archive -Path winhello-secure-*/* -DestinationPath winhello-secure-${{ github.event.inputs.tag }}.zip
-      - run: gh release create ${{ github.event.inputs.tag }} winhello-secure-${{ github.event.inputs.tag }}.zip --generate-notes
+      - run: gh release create ${{ github.event.inputs.tag }} ./winhello-secure-${{ github.event.inputs.tag }}.zip --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
