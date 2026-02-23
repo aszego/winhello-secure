@@ -40,15 +40,22 @@ jobs:
         with:
           name: ${{ needs.build.outputs.artifact_name }}
           path: release
-      - name: Create release package
+      - uses: actions/download-artifact@v4
+        with:
+          name: winhello-secure-standalone-${{ needs.version.outputs.version }}
+          path: release-standalone
+      - name: Create release packages
         run: |
           Write-Host "Contents of release folder:"
           Get-ChildItem -Path release -Recurse | ForEach-Object { Write-Host $_.FullName }
           $zipName = "winhello-secure-${{ github.event.inputs.tag }}.zip"
           $zipPath = Join-Path $env:GITHUB_WORKSPACE $zipName
           Compress-Archive -Path release\* -DestinationPath $zipPath -Force
+          $standaloneZipName = "winhello-secure-standalone-${{ github.event.inputs.tag }}.zip"
+          $standaloneZipPath = Join-Path $env:GITHUB_WORKSPACE $standaloneZipName
+          Compress-Archive -Path release-standalone\* -DestinationPath $standaloneZipPath -Force
           Write-Host "Zip created: $zipPath"
-          Write-Host "Zip exists: $(Test-Path $zipPath)"
-          gh release create ${{ github.event.inputs.tag }} $zipPath --generate-notes
+          Write-Host "Standalone zip created: $standaloneZipPath"
+          gh release create ${{ github.event.inputs.tag }} $zipPath $standaloneZipPath --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

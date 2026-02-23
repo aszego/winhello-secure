@@ -39,11 +39,20 @@ jobs:
       - name: Publish (Release)
         run: dotnet publish winhello-secure/winhello-secure.csproj -c Release --no-build -o publish -p:PublishSingleFile=true -p:DebugSymbols=false
 
+      - name: Publish (Standalone)
+        run: dotnet publish winhello-secure/winhello-secure.csproj -c Release --no-build -o publish-standalone -p:PublishSingleFile=true -p:DebugSymbols=false -p:SelfContained=true -p:IncludeNativeLibrariesForSelfExtract=true
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: winhello-secure-${{ inputs.version }}
           path: publish
+
+      - name: Upload standalone artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: winhello-secure-standalone-${{ inputs.version }}
+          path: publish-standalone
 
       - id: artifact
         run: echo "artifact_name=winhello-secure-${{ inputs.version }}" >> $GITHUB_OUTPUT
