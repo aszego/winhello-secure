@@ -18,7 +18,9 @@ Prompts for the RDP password, encrypts it with Windows Hello, and stores it in J
 ```
 winhello-secure.exe <rdpPath> [/multiMon]
 ```
-Looks up stored credentials, decrypts via Windows Hello, creates a temporary RDP file with the password, and runs `mstsc`. Use `/multiMon` to patch the RDP file for multi-monitor layout.
+Looks up stored credentials, decrypts via Windows Hello, creates a temporary RDP file with the password (still encrypted with DPAPI), and runs `mstsc`. Deletes the temporarz file in a few seconds.
+
+Use `/multiMon` to patch the RDP file for multi-monitor layout.
 
 ### General (scripts)
 
