@@ -15,6 +15,8 @@ on:
     outputs:
       artifact_name:
         value: ${{ jobs.build.outputs.artifact_name }}
+      standalone_artifact_name:
+        value: ${{ jobs.build.outputs.standalone_artifact_name }}
 
 jobs:
   build:
@@ -55,8 +57,11 @@ jobs:
           path: publish-standalone
 
       - id: artifact
-        run: echo "artifact_name=winhello-secure-${{ inputs.version }}" >> $GITHUB_OUTPUT
+        run: |
+          echo "artifact_name=winhello-secure-${{ inputs.version }}" >> $GITHUB_OUTPUT
+          echo "standalone_artifact_name=winhello-secure-standalone-${{ inputs.version }}" >> $GITHUB_OUTPUT
         shell: bash
 
     outputs:
       artifact_name: ${{ steps.artifact.outputs.artifact_name }}
+      standalone_artifact_name: ${{ steps.artifact.outputs.standalone_artifact_name }}

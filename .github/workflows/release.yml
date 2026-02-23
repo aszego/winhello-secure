@@ -42,7 +42,7 @@ jobs:
           path: release
       - uses: actions/download-artifact@v4
         with:
-          name: winhello-secure-standalone-${{ needs.version.outputs.version }}
+          name: ${{ needs.build.outputs.standalone_artifact_name }}
           path: release-standalone
       - name: Create release packages
         run: |
