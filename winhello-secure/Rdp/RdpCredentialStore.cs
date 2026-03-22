@@ -8,11 +8,6 @@ namespace WhSecure.Rdp;
 
 internal static class RdpCredentialStore
 {
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        WriteIndented = true,
-    };
-
     private static string StorePath =>
         Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -49,7 +44,7 @@ internal static class RdpCredentialStore
         try
         {
             var json = File.ReadAllText(StorePath);
-            var dict = JsonSerializer.Deserialize<Dictionary<string, RdpEntry>>(json);
+            var dict = JsonSerializer.Deserialize(json, RdpJsonContext.Default.DictionaryStringRdpEntry);
             return dict ?? new Dictionary<string, RdpEntry>();
         }
         catch
@@ -60,7 +55,7 @@ internal static class RdpCredentialStore
 
     private static void Save(Dictionary<string, RdpEntry> store)
     {
-        var json = JsonSerializer.Serialize(store, JsonOptions);
+        var json = JsonSerializer.Serialize(store, RdpJsonContext.Default.DictionaryStringRdpEntry);
         File.WriteAllText(StorePath, json);
     }
 }
