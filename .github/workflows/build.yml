@@ -42,7 +42,7 @@ jobs:
         run: dotnet publish winhello-secure/winhello-secure.csproj -c Release --no-build -o publish -p:PublishSingleFile=true -p:DebugSymbols=false
 
       - name: Publish (Standalone)
-        run: dotnet publish winhello-secure/winhello-secure.csproj -c Release -o publish-standalone -p:PublishSingleFile=true -p:DebugSymbols=false -p:SelfContained=true -p:IncludeNativeLibrariesForSelfExtract=true
+        run: dotnet publish winhello-secure/winhello-secure.csproj -c Release -o publish-standalone -p:PublishSingleFile=true -p:DebugSymbols=false -p:SelfContained=true -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishTrimmed=true -p:TrimMode=full
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
