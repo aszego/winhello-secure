@@ -11,6 +11,7 @@ internal static class RdpLaunchHelper
     private const string PasswordLinePrefix = "password 51:b:";
     private const string UsernameLinePrefix = "username:s:";
     private const string UseMultimonPrefix = "use multimon:i:";
+    private const string PromptForCredsPrefix = "prompt for credentials:i:1";
     private const int DefaultWaitMs = 10_000;
 
     /// <summary>
@@ -30,7 +31,7 @@ internal static class RdpLaunchHelper
     /// </summary>
     public static string WriteTempRdp(string sourceRdpPath, string username, string plainPassword, bool useMultiMon)
     {
-        var lines = File.ReadAllLines(sourceRdpPath);
+        var lines = File.ReadAllLines(sourceRdpPath).Select(s => s.Trim());
         var passwordLine = BuildPassword51Line(plainPassword);
         var usernameLine = UsernameLinePrefix + username;
         var multimonLine = UseMultimonPrefix + (useMultiMon ? "1" : "0");
@@ -58,6 +59,10 @@ internal static class RdpLaunchHelper
             {
                 result.Add(multimonLine);
                 seenMultimon = true;
+                continue;
+            }
+            if (line.StartsWith(PromptForCredsPrefix, StringComparison.OrdinalIgnoreCase))
+            {
                 continue;
             }
             result.Add(line);
